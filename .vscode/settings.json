@@ -1,0 +1,11 @@
+{
+    "editor.detectIndentation":false,
+    "editor.tabSize": 2,
+    "files.eol":"\n",
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "javascript.format.enable": false,
+    "typescript.format.enable": false,
+    "vetur.format.enable": false
+}
