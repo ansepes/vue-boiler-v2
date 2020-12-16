@@ -1,6 +1,7 @@
 export interface RootState {
-  CounterModule: ICounterState
-  TodoListModule: ITodoListState
+  CounterStore: ICounterState
+  TodoListStore: ITodoListState
+  LoadingStore: ILoadingState
 }
 
 // Loading

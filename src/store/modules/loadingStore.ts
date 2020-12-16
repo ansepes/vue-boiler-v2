@@ -28,4 +28,4 @@ class LoadingStore extends VuexModule implements ILoadingState {
   }
 }
 
-export const LoadingModule = getModule(LoadingStore)
+export const loadingStoreModule = getModule(LoadingStore)

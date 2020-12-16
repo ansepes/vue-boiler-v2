@@ -45,4 +45,4 @@ class CounterStore extends VuexModule implements ICounterState {
   }
 }
 
-export const CounterModule = getModule(CounterStore)
+export const counterStoreModule = getModule(CounterStore)

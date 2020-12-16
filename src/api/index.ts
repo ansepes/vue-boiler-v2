@@ -1,6 +1,6 @@
 import axios from 'axios'
-import { LoadingModule } from '@/store/modules/loadingStore'
-import { ModalModule } from '@/store/modules/modalStore'
+import { loadingStoreModule } from '@/store/modules/loadingStore'
+import { modalStoreModule } from '@/store/modules/modalStore'
 
 const isDebug = process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test'
 
@@ -23,13 +23,13 @@ const ERR_MESGS = {
 }
 
 const showErrorMsg = async (msg: { title: string; message: string }, error: any) => {
-  await ModalModule.openWarnModal(msg)
+  await modalStoreModule.openWarnModal(msg)
   if (isDebug) console.log(error)
 }
 
 repo.interceptors.request.use(request => {
   //   if (isDebug) performance.mark('start')
-  LoadingModule.loadingOn()
+  loadingStoreModule.loadingOn()
   return request
 })
 
@@ -44,12 +44,12 @@ repo.interceptors.response.use(
       // Sentryでログを残すもよし
       // Sentry.captureMessage(message, Sentry.Severity.Debug);
     }
-    LoadingModule.loadingOff()
+    loadingStoreModule.loadingOff()
     return response
   },
   // 2XX範囲外のステータスコード
   async error => {
-    LoadingModule.loadingOff()
+    loadingStoreModule.loadingOff()
 
     if (!error.response) {
       await showErrorMsg(ERR_MESGS.UNEXPRECTED, error)

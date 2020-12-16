@@ -48,7 +48,7 @@ import { Component, Vue } from 'vue-property-decorator'
 // import HelloWorld from './components/HelloWorld.vue'
 import Modal from '@/basic/components/Modal.vue'
 import Loading from '@/basic/components/Loading.vue'
-import { LoadingModule } from '@/store/modules/loadingStore'
+import { loadingStoreModule } from '@/store/modules/loadingStore'
 
 @Component({
   components: {
@@ -59,7 +59,7 @@ import { LoadingModule } from '@/store/modules/loadingStore'
 export default class App extends Vue {
   // getter
   get loading() {
-    return LoadingModule.getLoading
+    return loadingStoreModule.getLoading
   }
 
   // methods

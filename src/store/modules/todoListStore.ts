@@ -96,4 +96,4 @@ class TodoListStore extends VuexModule implements ITodoListState {
   }
 }
 
-export const TodoListModule = getModule(TodoListStore)
+export const todoListStoreModule = getModule(TodoListStore)

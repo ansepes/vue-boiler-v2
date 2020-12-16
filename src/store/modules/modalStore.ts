@@ -151,4 +151,4 @@ class ModalStore extends VuexModule implements IModalState {
   }
 }
 
-export const ModalModule = getModule(ModalStore)
+export const modalStoreModule = getModule(ModalStore)

@@ -45,36 +45,36 @@
 
 <script>
 import { Component, Vue, Watch } from 'vue-property-decorator'
-import { ModalModule } from '@/store/modules/modalStore'
+import { modalStoreModule } from '@/store/modules/modalStore'
 
 @Component
 export default class Modal extends Vue {
   get infoState() {
-    return ModalModule.getInfoState
+    return modalStoreModule.getInfoState
   }
 
   get warnState() {
-    return ModalModule.getWarnState
+    return modalStoreModule.getWarnState
   }
 
   get confirmState() {
-    return ModalModule.getConfirmState
+    return modalStoreModule.getConfirmState
   }
 
   closeInfoModal() {
-    ModalModule.closeInfoModal()
+    modalStoreModule.closeInfoModal()
   }
 
   closeWarnModal() {
-    ModalModule.closeWarnModal()
+    modalStoreModule.closeWarnModal()
   }
 
   closeConfirmModalOK() {
-    ModalModule.closeConfirmOK()
+    modalStoreModule.closeConfirmOK()
   }
 
   closeConfirmModalCancel() {
-    ModalModule.closeConfirmCancel()
+    modalStoreModule.closeConfirmCancel()
   }
 
   @Watch('infoState')

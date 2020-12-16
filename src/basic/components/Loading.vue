@@ -16,7 +16,7 @@
 import { Component, Vue } from 'vue-property-decorator'
 import { VueLoading } from 'vue-loading-template'
 
-import { LoadingModule } from '@/store/modules/loadingStore'
+import { loadingStoreModule } from '@/store/modules/loadingStore'
 
 @Component({
   components: {
@@ -25,7 +25,7 @@ import { LoadingModule } from '@/store/modules/loadingStore'
 })
 export default class Loading extends Vue {
   get loading() {
-    return LoadingModule.getLoading
+    return loadingStoreModule.getLoading
   }
 }
 </script>
