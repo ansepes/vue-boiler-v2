@@ -5,7 +5,9 @@
 	"build": {
 		"dockerfile": "Dockerfile",
 	},
-	// Set *default* container specific settings.json values on container create. 
+  // Set *default* container specific settings.json values on container create. 
+  "mounts": ["source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=delegated"],
+  "workspaceFolder": "/home/vscode",
 	"settings": {
 		"terminal.integrated.shell.linux": "/bin/bash"
 	},
@@ -16,7 +18,7 @@
 		"dbaeumer.vscode-eslint",
 		"octref.vetur"
     ],
-    "postCreateCommand": "yarn",
+    "postCreateCommand": "cp -r /workspace/. /home/vscode/ && cd /home/vscode/ && yarn",
     
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
