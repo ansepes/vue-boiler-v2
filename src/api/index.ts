@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { loadingStoreModule } from '@/store/modules/loadingStore'
 import { modalStoreModule } from '@/store/modules/modalStore'
+import { routingStoreModule } from '@/store/modules/routingStore'
 
 const isDebug = process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test'
 
@@ -18,13 +19,24 @@ const createMsg = (title: string, message: string) => {
 const ERR_MESGS = {
   UNEXPRECTED: createMsg('予期しないエラー', '予期しないエラーが発生しました。'),
   PARAMS: createMsg('アクセスエラー', 'パラメータエラーが発生しました。'),
-  AUTHORIZATION: createMsg('アクセスエラー', '認証エラーが発生しました。'),
+  UNAUTHORIZATION: createMsg('アクセスエラー', '認証エラーが発生しました。'),
+  NOT_FOUND: createMsg('リソースエラー', '該当のリソースが見つかりませんでした。'),
   SERVER_INTERNAL: createMsg('アクセスエラー', 'サーバーにてエラーが発生しました。'),
 }
 
 const showErrorMsg = async (msg: { title: string; message: string }, error: any) => {
+  // if (isDebug) console.log(error.response)
+
+  if (error.response.data.message) {
+    await modalStoreModule.openWarnModal({
+      title: msg.title,
+      message: error.response.data.message,
+    })
+    return error
+  }
+
   await modalStoreModule.openWarnModal(msg)
-  if (isDebug) console.log(error)
+  return error
 }
 
 repo.interceptors.request.use(request => {
@@ -37,7 +49,7 @@ repo.interceptors.response.use(
   // 2XX範囲内のステータスコード
   response => {
     if (isDebug) {
-      console.log(JSON.stringify(response))
+      // console.log(JSON.stringify(response))
       // performance.mark('finish')
       // performance.measure('request-to-response', 'start', 'finish')
       //   const message = `${performance.getEntriesByName('request-to-response')[0].duration}`
@@ -59,7 +71,11 @@ repo.interceptors.response.use(
     if (error.response.status === 400) {
       await showErrorMsg(ERR_MESGS.PARAMS, error)
     } else if (error.response.status === 401) {
-      await showErrorMsg(ERR_MESGS.AUTHORIZATION, error)
+      await showErrorMsg(ERR_MESGS.UNAUTHORIZATION, error)
+      routingStoreModule.moveToRoot()
+    } else if (error.response.status === 404) {
+      await showErrorMsg(ERR_MESGS.NOT_FOUND, error)
+      routingStoreModule.moveToRoot()
     } else if (error.response.status === 500) {
       await showErrorMsg(ERR_MESGS.SERVER_INTERNAL, error)
     }

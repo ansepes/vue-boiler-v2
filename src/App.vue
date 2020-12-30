@@ -2,6 +2,7 @@
   <v-app>
     <Modal></Modal>
     <Loading></Loading>
+    <Routing></Routing>
     <v-app-bar app color="primary" dark>
       <div class="d-flex align-center">
         <v-img
@@ -48,12 +49,14 @@ import { Component, Vue } from 'vue-property-decorator'
 // import HelloWorld from './components/HelloWorld.vue'
 import Modal from '@/basic/components/Modal.vue'
 import Loading from '@/basic/components/Loading.vue'
+import Routing from '@/basic/components/Routing.vue'
 import { loadingStoreModule } from '@/store/modules/loadingStore'
 
 @Component({
   components: {
     Loading,
     Modal,
+    Routing,
   },
 })
 export default class App extends Vue {

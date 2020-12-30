@@ -1,7 +1,9 @@
 export interface RootState {
+  LoadingStore: ILoadingState
+  ModalStore: IModalState
+  RoutingStore: IRoutingState
   CounterStore: ICounterState
   TodoListStore: ITodoListState
-  LoadingStore: ILoadingState
 }
 
 // Loading
@@ -32,6 +34,11 @@ export enum ModalCloseButtonTypes {
   Close,
   OK,
   Cancel,
+}
+
+// Routing
+export interface IRoutingState {
+  toPath: string | undefined
 }
 
 // TodoList
